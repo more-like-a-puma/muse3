@@ -52,7 +52,7 @@ app.init = function () {
   app.height = window.innerHeight;
 
   // angle, aspect ratio, near, far
-  app.camera = new THREE.PerspectiveCamera(45, app.width / app.height, 0.1, 1000 );
+  app.camera = new THREE.PerspectiveCamera(90, app.width / app.height, 0.1, 20000 );
   app.camera.position.x = -30;
   app.camera.position.y = 40;
   app.camera.position.z = 30;
@@ -62,7 +62,7 @@ app.init = function () {
   app.renderer.shadowMap.enabled = true;
   app.renderer.setPixelRatio( window.devicePixelRatio || 1 );
   app.renderer.setSize( app.width, app.height );
-  app.renderer.setClearColor( 0xECEFF1 );
+  // app.renderer.setClearColor( 0xECEFF1 );
 
   // app.axes = new THREE.AxisHelper( 40 );
   // app.scene.add( app.axes );
@@ -73,11 +73,16 @@ app.init = function () {
 	var skyGeometry = new THREE.CubeGeometry( 5000, 5000, 5000 );
 
 	var materialArray = [];
+  var textureLoader = new THREE.TextureLoader();
 	for (var i = 0; i < 6; i++) {
 		materialArray.push( new THREE.MeshBasicMaterial({
-			map: THREE.ImageUtils.loadTexture( directions[i] ),
+			map: textureLoader.load( directions[i] ),
 			side: THREE.BackSide
-		}))};
+		}))
+    materialArray.forEach(function(direction, i) {
+        materialArray[i].side = THREE.BackSide
+    })
+  };
 	var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
 	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 	app.scene.add( skyBox );
@@ -142,17 +147,6 @@ app.init = function () {
   app.cube3.castShadow = true;
   app.scene.add( app.cube3 );
 
-  // var sphereGeometry = new THREE.SphereGeometry(4, 30, 30);
-  // var sphereMaterial = new THREE.MeshLambertMaterial({
-  //   color: 0x039BE5,
-  //   // wireframe: true
-  // });
-  // app.sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
-  // app.sphere.position.x = 20;
-  // app.sphere.position.y = 4;
-  // app.sphere.position.z = 2;
-  // app.sphere.castShadow = true;
-  // app.scene.add( app.sphere );
 
   app.pointLight = new THREE.PointLight( 0xFFFFFF );
   app.pointLight.position.set( 15, 30, 10 );
@@ -174,7 +168,6 @@ app.init = function () {
 
   // app.gui = new dat.GUI();
   // app.gui.add(app.controller, 'rotationSpeed', 0, 0.2);
-  // app.gui.add(app.controller, 'bouncingSpeed', 0, 3.141);
 };
 
 window.onload = app.init;
