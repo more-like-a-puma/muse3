@@ -52,7 +52,7 @@ app.init = function () {
   app.height = window.innerHeight;
 
   // angle, aspect ratio, near, far
-  app.camera = new THREE.PerspectiveCamera(90, app.width / app.height, 0.1, 20000 );
+  app.camera = new THREE.PerspectiveCamera( 90, app.width / app.height, 0.1, 20000 );
   app.camera.position.x = -30;
   app.camera.position.y = 40;
   app.camera.position.z = 30;
