@@ -21,6 +21,14 @@ app.animate = function () {
   app.cube1.rotation.y += app.controller.rotationSpeed;
   app.cube1.rotation.z += app.controller.rotationSpeed;
 
+  app.cube2.rotation.x += app.controller.rotationSpeed;
+  app.cube2.rotation.y += app.controller.rotationSpeed;
+  app.cube2.rotation.z += app.controller.rotationSpeed;
+
+  app.cube3.rotation.x += app.controller.rotationSpeed;
+  app.cube3.rotation.y += app.controller.rotationSpeed;
+  app.cube3.rotation.z += app.controller.rotationSpeed;
+
   requestAnimationFrame( app.animate );
   app.renderer.render( app.scene, app.camera );
 };
@@ -65,13 +73,13 @@ app.init = function () {
 	var skyGeometry = new THREE.CubeGeometry( 5000, 5000, 5000 );
 
 	var materialArray = [];
-	for (var i = 0; i < 6; i++)
+	for (var i = 0; i < 6; i++) {
 		materialArray.push( new THREE.MeshBasicMaterial({
 			map: THREE.ImageUtils.loadTexture( directions[i] ),
 			side: THREE.BackSide
-		}));
+		}))};
 	var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
-	var skyBox = new THREE.MeshLambertMaterial( skyGeometry, skyMaterial );
+	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 	app.scene.add( skyBox );
 
   var planeGeometry = new THREE.PlaneGeometry(150, 150);
@@ -92,7 +100,7 @@ app.init = function () {
     // wireframe: true
   });
   app.cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
-  app.cube.position.x = -4;
+  app.cube.position.x = -2;
   app.cube.position.y = 1;
   app.cube.position.z = 0;
   app.cube.castShadow = true;
@@ -109,6 +117,30 @@ app.init = function () {
   app.cube1.position.z = 0;
   app.cube1.castShadow = true;
   app.scene.add( app.cube1 );
+
+  var cubeGeometry2 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterial2 = new THREE.MeshLambertMaterial({
+    color: 0xD32F49,
+    // wireframe: true
+  });
+  app.cube2 = new THREE.Mesh( cubeGeometry2, cubeMaterial2 );
+  app.cube2.position.x = 6;
+  app.cube2.position.y = 1;
+  app.cube2.position.z = 0;
+  app.cube2.castShadow = true;
+  app.scene.add( app.cube2 );
+
+  var cubeGeometry3 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterial3 = new THREE.MeshLambertMaterial({
+    color: 0xD32F10,
+    // wireframe: true
+  });
+  app.cube3 = new THREE.Mesh( cubeGeometry3, cubeMaterial3 );
+  app.cube3.position.x = 14;
+  app.cube3.position.y = 1;
+  app.cube3.position.z = 0;
+  app.cube3.castShadow = true;
+  app.scene.add( app.cube3 );
 
   // var sphereGeometry = new THREE.SphereGeometry(4, 30, 30);
   // var sphereMaterial = new THREE.MeshLambertMaterial({
