@@ -87,17 +87,17 @@ app.init = function () {
 	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 	app.scene.add( skyBox );
 
-  var planeGeometry = new THREE.PlaneGeometry(150, 150);
-  var planeMaterial = new THREE.MeshLambertMaterial({
-    color: 0x202010
-  });
-  app.plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  app.plane.rotation.x = -0.5 * Math.PI;
-  app.plane.position.x = 0;
-  app.plane.position.y = -2;
-  app.plane.position.z = 0;
-  app.plane.receiveShadow = true;
-  app.scene.add(app.plane);
+  // var planeGeometry = new THREE.PlaneGeometry(150, 150);
+  // var planeMaterial = new THREE.MeshLambertMaterial({
+  //   color: 0x202010
+  // });
+  // app.plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  // app.plane.rotation.x = -0.5 * Math.PI;
+  // app.plane.position.x = 0;
+  // app.plane.position.y = -2;
+  // app.plane.position.z = 0;
+  // app.plane.receiveShadow = true;
+  // // app.scene.add(app.plane);
 
   var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
   var cubeMaterial = new THREE.MeshLambertMaterial({
@@ -149,7 +149,7 @@ app.init = function () {
 
 
   app.pointLight = new THREE.PointLight( 0xFFFFFF );
-  app.pointLight.position.set( 15, 30, 10 );
+  app.pointLight.position.set( 30, 40, -40 );
   app.pointLight.castShadow = true;
   app.pointLight.shadow.mapSize.width = 2048;
   app.pointLight.shadow.mapSize.height = 2048;
