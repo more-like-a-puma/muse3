@@ -1,17 +1,45 @@
 var app = app || {};
+
+var radioBasics = function (e) {
+  e.preventDefault();
+
+
+  var baseURL = "http://api.dirble.com/v2/station/";
+  var endURL = "?token=0b939a62fccab63e64f6fc88f3";
+
+  var randomStation = Math.floor(Math.random() * 600) + 1;
+
+  var playTunes = function ( data ) {
+    var station = data.streams.stream;
+
+    // var radioTuner = document.getElementById("tunePlayer");
+    $('#radioTuner').attr("src", station );
+
+    console.log( data );
+  };
+
+  $.ajax({
+    url: baseURL + randomStation + endURL,
+    dataType: "JSON",
+    type: "GET"
+  }).done( playTunes );
+};
+
+////////////////////////////////////////////////////////////////////////////////
 app.step = 0; // base animation point
 
 app.controller = new function () {
   this.rotationSpeed = 0.02;
-  // this.bouncingSpeed = 0.02;
+};
+
+app.controller.opposite = new function () {
+  this.rotationSpeed = -0.02;
 };
 
 app.animate = function () {
   app.stats.update();
 
-  // app.step += app.controller.bouncingSpeed;
-  // app.sphere.position.x = 20 + (10 *(Math.cos(app.step)));
-  // app.sphere.position.y = 2 + (10 * (Math.abs(Math.sin(app.step))));
+  ////////////////////////////////////////////////////////////////////////////// RED
 
   app.cube.rotation.x += app.controller.rotationSpeed;
   app.cube.rotation.y += app.controller.rotationSpeed;
@@ -28,6 +56,94 @@ app.animate = function () {
   app.cube3.rotation.x += app.controller.rotationSpeed;
   app.cube3.rotation.y += app.controller.rotationSpeed;
   app.cube3.rotation.z += app.controller.rotationSpeed;
+
+  app.cube4.rotation.x += app.controller.rotationSpeed;
+  app.cube4.rotation.y += app.controller.rotationSpeed;
+  app.cube4.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeOut.rotation.x += app.controller.rotationSpeed;
+  app.cubeOut.rotation.y += app.controller.rotationSpeed;
+  app.cubeOut.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeOut1.rotation.x += app.controller.rotationSpeed;
+  app.cubeOut1.rotation.y += app.controller.rotationSpeed;
+  app.cubeOut1.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeOut2.rotation.x += app.controller.rotationSpeed;
+  app.cubeOut2.rotation.y += app.controller.rotationSpeed;
+  app.cubeOut2.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeOut3.rotation.x += app.controller.rotationSpeed;
+  app.cubeOut3.rotation.y += app.controller.rotationSpeed;
+  app.cubeOut3.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeSide.rotation.x += app.controller.rotationSpeed;
+  app.cubeSide.rotation.y += app.controller.rotationSpeed;
+  app.cubeSide.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeSide1.rotation.x += app.controller.rotationSpeed;
+  app.cubeSide1.rotation.y += app.controller.rotationSpeed;
+  app.cubeSide1.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeSide2.rotation.x += app.controller.rotationSpeed;
+  app.cubeSide2.rotation.y += app.controller.rotationSpeed;
+  app.cubeSide2.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeSide3.rotation.x += app.controller.rotationSpeed;
+  app.cubeSide3.rotation.y += app.controller.rotationSpeed;
+  app.cubeSide3.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeIn.rotation.x += app.controller.rotationSpeed;
+  app.cubeIn.rotation.y += app.controller.rotationSpeed;
+  app.cubeIn.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeIn1.rotation.x += app.controller.rotationSpeed;
+  app.cubeIn1.rotation.y += app.controller.rotationSpeed;
+  app.cubeIn1.rotation.z += app.controller.rotationSpeed;
+
+  app.cubeIn2.rotation.x += app.controller.rotationSpeed;
+  app.cubeIn2.rotation.y += app.controller.rotationSpeed;
+  app.cubeIn2.rotation.z += app.controller.rotationSpeed;
+
+  ////////////////////////////////////////////////////////////////////////////// ORANGE
+
+  app.cubeOrange.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrange.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrange.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrange1.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrange1.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrange1.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrange2.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrange2.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrange2.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrangeOut.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOut.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOut.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrangeOut1.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOut1.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOut1.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrangeOuter.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOuter.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOuter.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrangeOuter1.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOuter1.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeOuter1.rotation.z += app.controller.opposite.rotationSpeed;
+
+  app.cubeOrangeBack.rotation.x += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeBack.rotation.y += app.controller.opposite.rotationSpeed;
+  app.cubeOrangeBack.rotation.z += app.controller.opposite.rotationSpeed;
+
+  ////////////////////////////////////////////////////////////////////////////// YELLOW
+
+  app.cubeYellow.rotation.x += app.controller.rotationSpeed;
+  app.cubeYellow.rotation.y += app.controller.rotationSpeed;
+  app.cubeYellow.rotation.z += app.controller.rotationSpeed;
 
   requestAnimationFrame( app.animate );
   app.renderer.render( app.scene, app.camera );
@@ -52,10 +168,10 @@ app.init = function () {
   app.height = window.innerHeight;
 
   // angle, aspect ratio, near, far
-  app.camera = new THREE.PerspectiveCamera( 90, app.width / app.height, 0.1, 20000 );
-  app.camera.position.x = -30;
-  app.camera.position.y = 40;
-  app.camera.position.z = 30;
+  app.camera = new THREE.PerspectiveCamera( 90, app.width / app.height, 0.1, 5000 );
+  app.camera.position.x = 0;
+  app.camera.position.y = 10;
+  app.camera.position.z = -30;
   app.camera.lookAt( app.scene.position );
 
   app.renderer = new THREE.WebGLRenderer();
@@ -87,17 +203,7 @@ app.init = function () {
 	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
 	app.scene.add( skyBox );
 
-  // var planeGeometry = new THREE.PlaneGeometry(150, 150);
-  // var planeMaterial = new THREE.MeshLambertMaterial({
-  //   color: 0x202010
-  // });
-  // app.plane = new THREE.Mesh(planeGeometry, planeMaterial);
-  // app.plane.rotation.x = -0.5 * Math.PI;
-  // app.plane.position.x = 0;
-  // app.plane.position.y = -2;
-  // app.plane.position.z = 0;
-  // app.plane.receiveShadow = true;
-  // // app.scene.add(app.plane);
+  ////////////////////////////////////////////////////////////////////////////// RED
 
   var cubeGeometry = new THREE.BoxGeometry(4, 4, 4);
   var cubeMaterial = new THREE.MeshLambertMaterial({
@@ -147,6 +253,261 @@ app.init = function () {
   app.cube3.castShadow = true;
   app.scene.add( app.cube3 );
 
+  var cubeGeometry4 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterial4 = new THREE.MeshLambertMaterial({
+    color: 0xD32219,
+    // wireframe: true
+  });
+  app.cube4 = new THREE.Mesh( cubeGeometry4, cubeMaterial4 );
+  app.cube4.position.x = -18;
+  app.cube4.position.y = 1;
+  app.cube4.position.z = 0;
+  app.cube4.castShadow = true;
+  app.scene.add( app.cube4 );
+
+  var cubeGeometryOut = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOut = new THREE.MeshLambertMaterial({
+    color: 0xB0171F,
+    // wireframe: true
+  });
+  app.cubeOut = new THREE.Mesh( cubeGeometryOut, cubeMaterialOut );
+  app.cubeOut.position.x = -18;
+  app.cubeOut.position.y = 1;
+  app.cubeOut.position.z = 8;
+  app.cubeOut.castShadow = true;
+  app.scene.add( app.cubeOut );
+
+  var cubeGeometryOut1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOut1 = new THREE.MeshLambertMaterial({
+    color: 0xD32F49,
+    // wireframe: true
+  });
+  app.cubeOut1 = new THREE.Mesh( cubeGeometryOut1, cubeMaterialOut1 );
+  app.cubeOut1.position.x = -18;
+  app.cubeOut1.position.y = 1;
+  app.cubeOut1.position.z = 16;
+  app.cubeOut1.castShadow = true;
+  app.scene.add( app.cubeOut1 );
+
+  var cubeGeometryOut2 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOut2 = new THREE.MeshLambertMaterial({
+    color: 0xD32F21,
+    // wireframe: true
+  });
+  app.cubeOut2 = new THREE.Mesh( cubeGeometryOut2, cubeMaterialOut2 );
+  app.cubeOut2.position.x = -18;
+  app.cubeOut2.position.y = 1;
+  app.cubeOut2.position.z = 24;
+  app.cubeOut2.castShadow = true;
+  app.scene.add( app.cubeOut2 );
+
+  var cubeGeometryOut3 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOut3 = new THREE.MeshLambertMaterial({
+    color: 0xD30000,
+    // wireframe: true
+  });
+  app.cubeOut3 = new THREE.Mesh( cubeGeometryOut3, cubeMaterialOut3 );
+  app.cubeOut3.position.x = -18;
+  app.cubeOut3.position.y = 1;
+  app.cubeOut3.position.z = 32;
+  app.cubeOut3.castShadow = true;
+  app.scene.add( app.cubeOut3 );
+
+  var cubeGeometrySide = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialSide = new THREE.MeshLambertMaterial({
+    color: 0xCD1029,
+    // wireframe: true
+  });
+  app.cubeSide = new THREE.Mesh( cubeGeometrySide, cubeMaterialSide );
+  app.cubeSide.position.x = -10;
+  app.cubeSide.position.y = 1;
+  app.cubeSide.position.z = 32;
+  app.cubeSide.castShadow = true;
+  app.scene.add( app.cubeSide );
+
+  var cubeGeometrySide1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialSide1 = new THREE.MeshLambertMaterial({
+    color: 0xD30000,
+    // wireframe: true
+  });
+  app.cubeSide1 = new THREE.Mesh( cubeGeometrySide1, cubeMaterialSide1 );
+  app.cubeSide1.position.x = -2;
+  app.cubeSide1.position.y = 1;
+  app.cubeSide1.position.z = 32;
+  app.cubeSide1.castShadow = true;
+  app.scene.add( app.cubeSide1 );
+
+  var cubeGeometrySide2 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialSide2 = new THREE.MeshLambertMaterial({
+    color: 0xB0171F,
+    // wireframe: true
+  });
+  app.cubeSide2 = new THREE.Mesh( cubeGeometrySide2, cubeMaterialSide2 );
+  app.cubeSide2.position.x = 6;
+  app.cubeSide2.position.y = 1;
+  app.cubeSide2.position.z = 32;
+  app.cubeSide2.castShadow = true;
+  app.scene.add( app.cubeSide2 );
+
+  var cubeGeometrySide3 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialSide3 = new THREE.MeshLambertMaterial({
+    color: 0xD32F2F,
+    // wireframe: true
+  });
+  app.cubeSide3 = new THREE.Mesh( cubeGeometrySide3, cubeMaterialSide3 );
+  app.cubeSide3.position.x = 14;
+  app.cubeSide3.position.y = 1;
+  app.cubeSide3.position.z = 32;
+  app.cubeSide3.castShadow = true;
+  app.scene.add( app.cubeSide3 );
+
+  var cubeGeometryIn = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialIn = new THREE.MeshLambertMaterial({
+    color: 0xD90F61,
+    // wireframe: true
+  });
+  app.cubeIn = new THREE.Mesh( cubeGeometryIn, cubeMaterialIn );
+  app.cubeIn.position.x = 14;
+  app.cubeIn.position.y = 1;
+  app.cubeIn.position.z = 24;
+  app.cubeIn.castShadow = true;
+  app.scene.add( app.cubeIn );
+
+  var cubeGeometryIn1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialIn1 = new THREE.MeshLambertMaterial({
+    color: 0xCD102F,
+    // wireframe: true
+  });
+  app.cubeIn1 = new THREE.Mesh( cubeGeometryIn1, cubeMaterialIn1 );
+  app.cubeIn1.position.x = 14;
+  app.cubeIn1.position.y = 1;
+  app.cubeIn1.position.z = 16;
+  app.cubeIn1.castShadow = true;
+  app.scene.add( app.cubeIn1 );
+
+  var cubeGeometryIn2 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialIn2 = new THREE.MeshLambertMaterial({
+    color: 0xD32000,
+    // wireframe: true
+  });
+  app.cubeIn2 = new THREE.Mesh( cubeGeometryIn2, cubeMaterialIn2 );
+  app.cubeIn2.position.x = 14;
+  app.cubeIn2.position.y = 1;
+  app.cubeIn2.position.z = 8;
+  app.cubeIn2.castShadow = true;
+  app.scene.add( app.cubeIn2 );
+
+  ////////////////////////////////////////////////////////////////////////////// ORANGE
+
+  var cubeGeometryOrange1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrange1 = new THREE.MeshLambertMaterial({
+    color: 0xe63e00,
+    // wireframe: true
+  });
+  app.cubeOrange1 = new THREE.Mesh( cubeGeometryOrange1, cubeMaterialOrange1 );
+  app.cubeOrange1.position.x = 6;
+  app.cubeOrange1.position.y = 3;
+  app.cubeOrange1.position.z = 16;
+  app.cubeOrange1.castShadow = true;
+  app.scene.add( app.cubeOrange1 );
+
+  var cubeGeometryOrange = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrange = new THREE.MeshLambertMaterial({
+    color: 0xff6a33,
+    // wireframe: true
+  });
+  app.cubeOrange = new THREE.Mesh( cubeGeometryOrange, cubeMaterialOrange );
+  app.cubeOrange.position.x = 6;
+  app.cubeOrange.position.y = 3;
+  app.cubeOrange.position.z = 24;
+  app.cubeOrange.castShadow = true;
+  app.scene.add( app.cubeOrange );
+
+  var cubeGeometryOrange2 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrange2 = new THREE.MeshLambertMaterial({
+    color: 0xff8500,
+    // wireframe: true
+  });
+  app.cubeOrange2 = new THREE.Mesh( cubeGeometryOrange2, cubeMaterialOrange2 );
+  app.cubeOrange2.position.x = 6;
+  app.cubeOrange2.position.y = 3;
+  app.cubeOrange2.position.z = 8;
+  app.cubeOrange2.castShadow = true;
+  app.scene.add( app.cubeOrange2 );
+
+  var cubeGeometryOrangeOut = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrangeOut = new THREE.MeshLambertMaterial({
+    color: 0xff4500,
+    // wireframe: true
+  });
+  app.cubeOrangeOut = new THREE.Mesh( cubeGeometryOrangeOut, cubeMaterialOrangeOut );
+  app.cubeOrangeOut.position.x = -2;
+  app.cubeOrangeOut.position.y = 3;
+  app.cubeOrangeOut.position.z = 8;
+  app.cubeOrangeOut.castShadow = true;
+  app.scene.add( app.cubeOrangeOut );
+
+  var cubeGeometryOrangeOut1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrangeOut1 = new THREE.MeshLambertMaterial({
+    color: 0xff7000,
+    // wireframe: true
+  });
+  app.cubeOrangeOut1 = new THREE.Mesh( cubeGeometryOrangeOut1, cubeMaterialOrangeOut1 );
+  app.cubeOrangeOut1.position.x = -10;
+  app.cubeOrangeOut1.position.y = 3;
+  app.cubeOrangeOut1.position.z = 8;
+  app.cubeOrangeOut1.castShadow = true;
+  app.scene.add( app.cubeOrangeOut1 );
+
+  var cubeGeometryOrangeOuter1 = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrangeOuter1 = new THREE.MeshLambertMaterial({
+    color: 0xff8500,
+    // wireframe: true
+  });
+  app.cubeOrangeOuter1 = new THREE.Mesh( cubeGeometryOrangeOuter1, cubeMaterialOrangeOuter1 );
+  app.cubeOrangeOuter1.position.x = -10;
+  app.cubeOrangeOuter1.position.y = 3;
+  app.cubeOrangeOuter1.position.z = 16;
+  app.cubeOrangeOuter1.castShadow = true;
+  app.scene.add( app.cubeOrangeOuter1 );
+
+  var cubeGeometryOrangeOuter = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrangeOuter = new THREE.MeshLambertMaterial({
+    color: 0xff4500,
+    // wireframe: true
+  });
+  app.cubeOrangeOuter = new THREE.Mesh( cubeGeometryOrangeOuter, cubeMaterialOrangeOuter );
+  app.cubeOrangeOuter.position.x = -10;
+  app.cubeOrangeOuter.position.y = 3;
+  app.cubeOrangeOuter.position.z = 24;
+  app.cubeOrangeOuter.castShadow = true;
+  app.scene.add( app.cubeOrangeOuter );
+
+  var cubeGeometryOrangeBack = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialOrangeBack = new THREE.MeshLambertMaterial({
+    color: 0xff8500,
+    // wireframe: true
+  });
+  app.cubeOrangeBack = new THREE.Mesh( cubeGeometryOrangeBack, cubeMaterialOrangeBack );
+  app.cubeOrangeBack.position.x = -2;
+  app.cubeOrangeBack.position.y = 3;
+  app.cubeOrangeBack.position.z = 24;
+  app.cubeOrangeBack.castShadow = true;
+  app.scene.add( app.cubeOrangeBack );
+
+  ////////////////////////////////////////////////////////////////////////////// YELLOW
+
+  var cubeGeometryYellow = new THREE.BoxGeometry(4, 4, 4);
+  var cubeMaterialYellow = new THREE.MeshLambertMaterial({
+    color: 0xffd500,
+    // wireframe: true
+  });
+  app.cubeYellow = new THREE.Mesh( cubeGeometryYellow, cubeMaterialYellow );
+  app.cubeYellow.position.x = -2;
+  app.cubeYellow.position.y = 4;
+  app.cubeYellow.position.z = 16;
+  app.cubeYellow.castShadow = true;
+  app.scene.add( app.cubeYellow );
 
   app.pointLight = new THREE.PointLight( 0xFFFFFF );
   app.pointLight.position.set( 30, 40, -40 );
