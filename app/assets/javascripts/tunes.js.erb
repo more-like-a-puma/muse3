@@ -1,19 +1,21 @@
 var app = app || {};
 
-var radioBasics = function (e) {
-  e.preventDefault();
-
-
+var radioBasics = function () {
   var baseURL = "http://api.dirble.com/v2/station/";
   var endURL = "?token=0b939a62fccab63e64f6fc88f3";
 
   var randomStation = Math.floor(Math.random() * 600) + 1;
 
   var playTunes = function ( data ) {
-    var station = data.streams.stream;
+    var station = data.streams[0].stream;
 
     // var radioTuner = document.getElementById("tunePlayer");
-    $('#radioTuner').attr("src", station );
+    $('#tunePlayer').attr("src", station );
+    app.audio = app.audio || document.getElementById("tunePlayer");
+    app.audio.pause();
+    app.audio.currentTime = 0;
+    app.audio.play();
+    app.audio.volume = 1;
 
     console.log( data );
   };
@@ -22,7 +24,7 @@ var radioBasics = function (e) {
     url: baseURL + randomStation + endURL,
     dataType: "JSON",
     type: "GET"
-  }).done( playTunes );
+  }).done( playTunes ).fail( radioBasics );
 };
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -35,6 +37,10 @@ app.controller = new function () {
 app.controller.opposite = new function () {
   this.rotationSpeed = -0.02;
 };
+
+var raycaster = new THREE.Raycaster();
+// var mouse3D = new THREE.Vector3();
+var targetList = [];
 
 app.animate = function () {
   app.stats.update();
@@ -215,6 +221,7 @@ app.init = function () {
   app.cube.position.y = 1;
   app.cube.position.z = 0;
   app.cube.castShadow = true;
+  targetList.push( app.cube );
   app.scene.add( app.cube );
 
   var cubeGeometry1 = new THREE.BoxGeometry(4, 4, 4);
@@ -227,6 +234,7 @@ app.init = function () {
   app.cube1.position.y = 1;
   app.cube1.position.z = 0;
   app.cube1.castShadow = true;
+  targetList.push( app.cube1 );
   app.scene.add( app.cube1 );
 
   var cubeGeometry2 = new THREE.BoxGeometry(4, 4, 4);
@@ -239,6 +247,7 @@ app.init = function () {
   app.cube2.position.y = 1;
   app.cube2.position.z = 0;
   app.cube2.castShadow = true;
+  targetList.push( app.cube2 );
   app.scene.add( app.cube2 );
 
   var cubeGeometry3 = new THREE.BoxGeometry(4, 4, 4);
@@ -251,6 +260,7 @@ app.init = function () {
   app.cube3.position.y = 1;
   app.cube3.position.z = 0;
   app.cube3.castShadow = true;
+  targetList.push( app.cube3 );
   app.scene.add( app.cube3 );
 
   var cubeGeometry4 = new THREE.BoxGeometry(4, 4, 4);
@@ -263,6 +273,7 @@ app.init = function () {
   app.cube4.position.y = 1;
   app.cube4.position.z = 0;
   app.cube4.castShadow = true;
+  targetList.push( app.cube4 );
   app.scene.add( app.cube4 );
 
   var cubeGeometryOut = new THREE.BoxGeometry(4, 4, 4);
@@ -275,6 +286,7 @@ app.init = function () {
   app.cubeOut.position.y = 1;
   app.cubeOut.position.z = 8;
   app.cubeOut.castShadow = true;
+  targetList.push( app.cubeOut );
   app.scene.add( app.cubeOut );
 
   var cubeGeometryOut1 = new THREE.BoxGeometry(4, 4, 4);
@@ -287,6 +299,7 @@ app.init = function () {
   app.cubeOut1.position.y = 1;
   app.cubeOut1.position.z = 16;
   app.cubeOut1.castShadow = true;
+  targetList.push( app.cubeOut1 );
   app.scene.add( app.cubeOut1 );
 
   var cubeGeometryOut2 = new THREE.BoxGeometry(4, 4, 4);
@@ -299,6 +312,7 @@ app.init = function () {
   app.cubeOut2.position.y = 1;
   app.cubeOut2.position.z = 24;
   app.cubeOut2.castShadow = true;
+  targetList.push( app.cubeOut2 );
   app.scene.add( app.cubeOut2 );
 
   var cubeGeometryOut3 = new THREE.BoxGeometry(4, 4, 4);
@@ -311,6 +325,7 @@ app.init = function () {
   app.cubeOut3.position.y = 1;
   app.cubeOut3.position.z = 32;
   app.cubeOut3.castShadow = true;
+  targetList.push( app.cubeOut3 );
   app.scene.add( app.cubeOut3 );
 
   var cubeGeometrySide = new THREE.BoxGeometry(4, 4, 4);
@@ -323,6 +338,7 @@ app.init = function () {
   app.cubeSide.position.y = 1;
   app.cubeSide.position.z = 32;
   app.cubeSide.castShadow = true;
+  targetList.push( app.cubeSide );
   app.scene.add( app.cubeSide );
 
   var cubeGeometrySide1 = new THREE.BoxGeometry(4, 4, 4);
@@ -335,6 +351,7 @@ app.init = function () {
   app.cubeSide1.position.y = 1;
   app.cubeSide1.position.z = 32;
   app.cubeSide1.castShadow = true;
+  targetList.push( app.cubeSide1 );
   app.scene.add( app.cubeSide1 );
 
   var cubeGeometrySide2 = new THREE.BoxGeometry(4, 4, 4);
@@ -347,6 +364,7 @@ app.init = function () {
   app.cubeSide2.position.y = 1;
   app.cubeSide2.position.z = 32;
   app.cubeSide2.castShadow = true;
+  targetList.push( app.cubeSide2 );
   app.scene.add( app.cubeSide2 );
 
   var cubeGeometrySide3 = new THREE.BoxGeometry(4, 4, 4);
@@ -359,6 +377,7 @@ app.init = function () {
   app.cubeSide3.position.y = 1;
   app.cubeSide3.position.z = 32;
   app.cubeSide3.castShadow = true;
+  targetList.push( app.cubeSide3 );
   app.scene.add( app.cubeSide3 );
 
   var cubeGeometryIn = new THREE.BoxGeometry(4, 4, 4);
@@ -371,6 +390,7 @@ app.init = function () {
   app.cubeIn.position.y = 1;
   app.cubeIn.position.z = 24;
   app.cubeIn.castShadow = true;
+  targetList.push( app.cubeIn );
   app.scene.add( app.cubeIn );
 
   var cubeGeometryIn1 = new THREE.BoxGeometry(4, 4, 4);
@@ -383,6 +403,7 @@ app.init = function () {
   app.cubeIn1.position.y = 1;
   app.cubeIn1.position.z = 16;
   app.cubeIn1.castShadow = true;
+  targetList.push( app.cubeIn1 );
   app.scene.add( app.cubeIn1 );
 
   var cubeGeometryIn2 = new THREE.BoxGeometry(4, 4, 4);
@@ -395,6 +416,7 @@ app.init = function () {
   app.cubeIn2.position.y = 1;
   app.cubeIn2.position.z = 8;
   app.cubeIn2.castShadow = true;
+  targetList.push( app.cubeIn2 );
   app.scene.add( app.cubeIn2 );
 
   ////////////////////////////////////////////////////////////////////////////// ORANGE
@@ -409,6 +431,7 @@ app.init = function () {
   app.cubeOrange1.position.y = 3;
   app.cubeOrange1.position.z = 16;
   app.cubeOrange1.castShadow = true;
+  targetList.push( app.cubeOrange1 );
   app.scene.add( app.cubeOrange1 );
 
   var cubeGeometryOrange = new THREE.BoxGeometry(4, 4, 4);
@@ -421,6 +444,7 @@ app.init = function () {
   app.cubeOrange.position.y = 3;
   app.cubeOrange.position.z = 24;
   app.cubeOrange.castShadow = true;
+  targetList.push( app.cubeOrange );
   app.scene.add( app.cubeOrange );
 
   var cubeGeometryOrange2 = new THREE.BoxGeometry(4, 4, 4);
@@ -433,6 +457,7 @@ app.init = function () {
   app.cubeOrange2.position.y = 3;
   app.cubeOrange2.position.z = 8;
   app.cubeOrange2.castShadow = true;
+  targetList.push( app.cubeOrange2 );
   app.scene.add( app.cubeOrange2 );
 
   var cubeGeometryOrangeOut = new THREE.BoxGeometry(4, 4, 4);
@@ -445,6 +470,7 @@ app.init = function () {
   app.cubeOrangeOut.position.y = 3;
   app.cubeOrangeOut.position.z = 8;
   app.cubeOrangeOut.castShadow = true;
+  targetList.push( app.cubeOrangeOut );
   app.scene.add( app.cubeOrangeOut );
 
   var cubeGeometryOrangeOut1 = new THREE.BoxGeometry(4, 4, 4);
@@ -457,6 +483,7 @@ app.init = function () {
   app.cubeOrangeOut1.position.y = 3;
   app.cubeOrangeOut1.position.z = 8;
   app.cubeOrangeOut1.castShadow = true;
+  targetList.push( app.cubeOrangeOut1 );
   app.scene.add( app.cubeOrangeOut1 );
 
   var cubeGeometryOrangeOuter1 = new THREE.BoxGeometry(4, 4, 4);
@@ -469,6 +496,7 @@ app.init = function () {
   app.cubeOrangeOuter1.position.y = 3;
   app.cubeOrangeOuter1.position.z = 16;
   app.cubeOrangeOuter1.castShadow = true;
+  targetList.push( app.cubeOrangeOuter1 );
   app.scene.add( app.cubeOrangeOuter1 );
 
   var cubeGeometryOrangeOuter = new THREE.BoxGeometry(4, 4, 4);
@@ -481,6 +509,7 @@ app.init = function () {
   app.cubeOrangeOuter.position.y = 3;
   app.cubeOrangeOuter.position.z = 24;
   app.cubeOrangeOuter.castShadow = true;
+  targetList.push( app.cubeOrangeOuter );
   app.scene.add( app.cubeOrangeOuter );
 
   var cubeGeometryOrangeBack = new THREE.BoxGeometry(4, 4, 4);
@@ -493,6 +522,7 @@ app.init = function () {
   app.cubeOrangeBack.position.y = 3;
   app.cubeOrangeBack.position.z = 24;
   app.cubeOrangeBack.castShadow = true;
+  targetList.push( app.cubeOrangeBack );
   app.scene.add( app.cubeOrangeBack );
 
   ////////////////////////////////////////////////////////////////////////////// YELLOW
@@ -507,6 +537,7 @@ app.init = function () {
   app.cubeYellow.position.y = 4;
   app.cubeYellow.position.z = 16;
   app.cubeYellow.castShadow = true;
+  targetList.push( app.cubeYellow );
   app.scene.add( app.cubeYellow );
 
   //////////////////////////////////////////////////////////////////////////////
@@ -529,8 +560,33 @@ app.init = function () {
   app.stats = app.addStats();
   app.animate();
 
-  // app.gui = new dat.GUI();
-  // app.gui.add(app.controller, 'rotationSpeed', 0, 0.2);
+
+  var onDocumentMouseDown = function( event ) {
+
+    var mouse = new THREE.Vector3(( event.clientX / window.innerWidth ) * 2 - 1, -( event.clientY / window.innerHeight ) * 2 + 1, 0.5);
+    // var mouse = new THREE.Vector3(event.clientX, event.clientY, 0.5);
+
+
+    raycaster.setFromCamera( mouse, app.camera );
+    // debugger;
+    var intersects = raycaster.intersectObjects( targetList );
+
+    radioBasics();
+
+    console.log( 'intersects: ', intersects );
+// debugger;
+    for ( var i = 0; i < intersects.length; i++ ) {
+      intersects[i].object.position.y += 3;
+  		// app.position.y(targetList[i], += 4);
+  	}
+
+    app.renderer.render( app.scene, app.camera );
+  };
+
+  window.addEventListener( "click", onDocumentMouseDown );
+
+
+
 };
 
 window.onload = app.init;
@@ -544,3 +600,7 @@ app.resize = function () {
 };
 
 window.addEventListener( "resize", app.resize );
+
+
+
+// window.requestAnimationFrame(render);
