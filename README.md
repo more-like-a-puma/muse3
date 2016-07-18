@@ -12,6 +12,8 @@ Thangs used:
 
 * Dirble API
 
+* THREE.js
+
 
 Get involved: https://muse-cube.herokuapp.com/
 
