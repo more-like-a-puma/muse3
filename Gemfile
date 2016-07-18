@@ -4,12 +4,6 @@ gem 'dirble'
 
 gem 'thin'
 
-gem 'faye'
-
-gem 'faye-rails', '~> 2.0'
-
-gem 'faye-websocket', '0.10.0'
-
 gem 'redis', '~>3.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

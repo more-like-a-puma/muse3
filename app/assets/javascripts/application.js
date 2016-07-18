@@ -13,17 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require underscore
-//= require faye
 //= require three
 //= require orbitControls
 //= require datGui
 //= require stats
 //= require_tree .
-
-
-window.client = new Faye.Client('/faye');
-
-window.client.subscribe('/tunes/new', function (data) {
-  console.log(data);
-  app.messages.add(data.data);
-});
