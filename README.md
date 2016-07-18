@@ -10,11 +10,13 @@ Thangs used:
 
 * Rails 4.2.6
 
+* Dirble API
 
-Get involved:
+
+Get involved: https://muse-cube.herokuapp.com/
 
 --------------------------------------------------------------------------------
 
-Things we would still like to work on in the future:
+Things I would still like to work on in the future:
 
-*
+* Saving stations to user profile
