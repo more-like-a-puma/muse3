@@ -10,7 +10,6 @@ Thangs used:
 
 * Rails 4.2.6
 
-* Faye websockets and Faye-rails
 
 Get involved:
 

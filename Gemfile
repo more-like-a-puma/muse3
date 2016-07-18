@@ -2,8 +2,6 @@ source 'https://rubygems.org'
 
 gem 'dirble'
 
-gem 'thin'
-
 gem 'redis', '~>3.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
